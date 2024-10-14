@@ -1,0 +1,101 @@
+Q) Second Largest
+
+Given an array arr, return the second largest distinct element from an array. If the second largest element doesn't exist then return -1.
+
+Examples:
+
+Input: arr = [12, 35, 1, 10, 34, 1]
+Output: 34
+Explanation: The largest element of the array is 35 and the second largest element is 34.
+
+
+****** Brute Force ******
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        // Code Here
+
+    Arrays.sort(arr) ; int n = arr.length ;
+    int largest = arr[n-1] ;
+    int slargest = -1 ;
+
+    for(int i = n-2 ; i>=0 ;i--)
+    {
+        if(arr[i] != largest)
+        {
+            slargest = arr[i];
+            break ;
+        }
+    }
+    
+    return slargest ;
+  }
+}
+
+Time Complexity: O(NlogN) + O(N) 
+
+Space Complexity: O(1)
+
+
+****** Better Approach ******
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        // Code Here
+        int n = arr.length ;
+        int large = arr[0] ;
+        int second_large = -1 ;      
+        
+        for (i = 1 ;i < n; i++)
+        {
+        		large = Math.max(large,arr[i]);
+        }
+        for (i = 0;i < n;i++)
+        {
+          if (arr[i] > second_large && arr[i] != large)
+          {
+            second_large = arr[i];
+          }
+        }
+        
+        return second_large ;
+    }
+}
+
+Time Complexity: O(2N)
+
+Space Complexity: O(1)
+
+
+****** Optimised Approach ****** 
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        // Code Here
+        
+    int n = arr.length ;
+	
+	int large = Integer.MIN_VALUE;
+	int second_large = Integer.MIN_VALUE;
+	int i;
+	for (i = 0; i < n; i++)
+	{
+		if (arr[i] > large)
+		{
+			second_large = large;
+			large = arr[i];
+		}
+
+		else if (arr[i] > second_large && arr[i] != large)
+		{
+			second_large = arr[i];
+		}
+	}
+	return second_large == Integer.MIN_VALUE ? -1 : second_large ;
+
+    }
+}
+
+Time Complexity: O(N)
+
+Space Complexity: O(1)
