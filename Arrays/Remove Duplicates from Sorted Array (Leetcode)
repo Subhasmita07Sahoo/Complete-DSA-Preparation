@@ -41,23 +41,23 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 ****** Brute Force ******
 
 class Solution {
-    public int removeDuplicates(int[] arr) {
+    public int removeDuplicates(int[] nums) {
 
     HashSet < Integer > set = new HashSet < > ();
-        for (int i = 0; i < arr.length; i++) {
-            set.add(arr[i]);
+        for (int i = 0; i < nums.length; i++) {
+            set.add(nums[i]);
         }
 
         int j = 0;
         for (int x: set) {
-            arr[j++] = x;
+            nums[j++] = x;
         }
         return set.size() ;
 
     }
 }
 
-Time complexity: O(n)+O(n) = 0(2n)
+Time complexity: O(n)+O(n) = O (2n)
 
 Space Complexity: O(n) 
 
