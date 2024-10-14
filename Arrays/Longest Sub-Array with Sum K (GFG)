@@ -1,0 +1,115 @@
+Q) Longest Sub-Array with Sum K (GFG)
+
+Given an array arr containing n integers and an integer k. Your task is to find the length of the longest Sub-Array with the sum of the elements equal to the given value k.
+
+Examples:
+
+Input : n = 6, arr[] = {10, 5, 2, 7, 1, 9}, k = 15
+Output : 4
+Explanation: The sub-array is {5, 2, 7, 1}.
+Input : n= 3, arr[] = {-1, 2, 3}, k = 6
+Output : 0
+Explanation: There is no such sub-array with sum 6.
+
+
+******  Brute Force ******
+
+class Solution {
+    // Function for finding maximum and value pair
+    public static int lenOfLongSubarr(int a[], int n, int k) {
+        // Complete the function
+
+        int len = 0;
+        for (int i = 0; i < n; i++) 
+        { 
+            for (int j = i; j < n; j++) 
+            {
+                long s = 0;
+                for (int K = i; K <= j; K++) {
+                    s += a[K];
+                }
+
+                if (s == k)
+                    len = Math.max(len, j - i + 1);
+            }
+        }
+        return len;
+    }
+}
+
+Time Complexity: O(n^3)
+Space Complexity: O(1)
+
+
+****** Better Approach ******
+
+class Solution {
+    // Function for finding maximum and value pair
+    public static int lenOfLongSubarr(int a[], int n, int k) {
+        // Complete the function
+
+        int len = 0;
+        for (int i = 0; i < n; i++) 
+        { 
+            long s = 0;
+            for (int j = i; j < n; j++) 
+            {
+                    s += a[j];
+                    if (s == k)
+                    {
+                        len = Math.max(len, j - i + 1);
+                    }  
+            }
+        }
+        return len;
+    }
+}
+
+Time Complexity: O(n^2)
+Space Complexity: O(1)
+
+
+****** Optimised Approach ******
+
+class Solution {
+    // Function for finding maximum and value pair
+    public static int lenOfLongSubarr(int a[], int n, int k) {
+        // Complete the function
+        
+
+        Map<Integer, Integer> preSumMap = new HashMap<>();
+        int sum = 0;
+        int maxLen = 0;
+        
+        for (int i = 0; i < n; i++) 
+        {
+            sum += a[i];
+
+            if (sum == k) 
+            {
+                maxLen = Math.max(maxLen, i + 1);
+            }
+
+ 
+            int rem = sum - k;
+
+            if (preSumMap.containsKey(rem)) 
+            {
+                int len = i - preSumMap.get(rem);
+                maxLen = Math.max(maxLen, len);
+            }
+
+            if (!preSumMap.containsKey(sum)) 
+            {
+                preSumMap.put(sum, i);
+            }
+        }
+
+        return maxLen;
+    }
+}
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+
