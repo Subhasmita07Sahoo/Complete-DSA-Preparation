@@ -1,0 +1,56 @@
+Q) Largest subarray with 0 sum (GFG)
+
+Given an array having both positive and negative integers. The task is to compute the length of the largest subarray with sum 0.
+
+Examples:
+
+Input: arr[] = {15,-2,2,-8,1,7,10,23}, n = 8
+Output: 5
+Explanation: The largest subarray with sum 0 is -2 2 -8 1 7.
+Input: arr[] = {2,10,4}, n = 3
+Output: 0
+Explanation: There is no subarray with 0 sum.
+Input: arr[] = {1, 0, -4, 3, 1, 0}, n = 6
+Output: 5
+Explanation: The subarray is 0 -4 3 1 0.
+
+
+class GfG
+{
+    int maxLen(int arr[], int n)
+    {
+        // Your code here
+        
+         HashMap<Integer, Integer> mpp = new HashMap<Integer, Integer>();
+
+        int maxLen = 0;
+        int sum = 0; 
+
+        for(int i = 0;i<n;i++)
+        {
+
+            sum += arr[i]; 
+
+            if(sum == 0) 
+            {
+                maxLen = i+1 ; 
+            }
+            
+            if(mpp.containsKey(sum)) 
+            {
+
+                maxLen = Math.max(maxLen, i - mpp.get(sum)); 
+            }
+            else 
+            {
+
+                mpp.put(sum, i); 
+            }
+        }
+            
+        return maxLen; 
+    }
+}
+
+Time Complexity: O(n).
+Space Complexity: O(n).
